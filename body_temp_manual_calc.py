@@ -1,30 +1,24 @@
 import pandas as pd
 import math
 
-# import the data
-
-jama_data = pd.read_table('https://ww2.amstat.org/publications/jse/datasets/normtemp.dat.txt', 
+data = pd.read_table('https://ww2.amstat.org/publications/jse/datasets/normtemp.dat.txt', 
                           sep="   ", 
                           engine='python',
                           header=None,
                           names = ["body_temp", "sex", "heart_rate"])
 
+# this function manually calcuates a one-sample t-statistic and degrees of freedom (DOF) for a user defined value 
+# (typically a population mean) and the 1996 JAMA body temperature data set. 
+#The function returns a 't-statistic' and DOF for use with a table of critical values. 
 
-# manually calculate the t-statistic for a 1-sample t test
-
-xbar = jama_data['body_temp'].mean()
-mu = 98.6
-s = jama_data['body_temp'].std()
-n = len(jama_data['body_temp'])
-dof = (len(jama_data)) -1
-t = (xbar - mu)/((s/math.sqrt(n)))
-
-print('')
-print('the sample mean is {0:0.2f}'.format(xbar))
-print('')
-print('the one-sample t(dof = {}) is {}'.format(dof,t))
-print('')
-print('α (0.0005, dof = 129) is 3.3676 and the p-value is <0.0001')
-print('')
-print('We reject the null hypothesis. The true population mean of human body temperature is not 98.6 F. ')
-print('')
+def manual_t_calc():
+    mu = float(input('What value of body temperature (in F) would you like to compare to the JAMA data?  '))
+    xbar = data['body_temp'].mean()
+    s = data['body_temp'].std()
+    n = len(data['body_temp'])
+    dof = (len(data)) -1
+    t = (xbar - mu)/((s/math.sqrt(n)))
+    print('\nthe sample mean is {0:0.2f}'.format(xbar))
+    print('\nthe one-sample t(dof = {}) is {}\n'.format(dof,t))
+    
+manual_t_calc()
