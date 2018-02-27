@@ -1,0 +1,6 @@
+.ipynb_checkpoints
+.DS_Store
+.gitattributes
+*.pyc
+*.Rhistory
+*.swp
